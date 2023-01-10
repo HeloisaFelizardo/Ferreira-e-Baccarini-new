@@ -5,14 +5,15 @@ function initAccordion() {
 
     function activeAccordion(index) {
         accordionListContent.forEach((content) => {
+
             content.classList.remove(activeClass);
         });
-        accordionListContent[index].classList.toggle(activeClass);
+        accordionListContent[index].classList.add(activeClass);
 
         accordionList.forEach((content) => {
             content.classList.remove(activeClass);
         });
-        accordionList[index].classList.toggle(activeClass);
+        accordionList[index].classList.add(activeClass);
     };
 
     accordionList.forEach((itemMenu, index) => {
@@ -26,23 +27,26 @@ initAccordion();
 
 function initScrollSuave() {
     const linksInternos = document.querySelectorAll('.js-menu a[href^="#"]');
+    const menu = document.querySelector('.menu');
+    const alturaMenu = menu.clientHeight;
+    const banner = document.querySelector('.banner');
+    banner.style.marginTop = alturaMenu + 'px';
 
     function scrollToSection(event) {
         event.preventDefault();
         const href = event.currentTarget.getAttribute('href');
         const section = document.querySelector(href);
-
-        section.scrollIntoView({
-            behavior: 'smooth',
-            block: 'start',
-        })
+        /*   section.scrollIntoView({
+              behavior: 'smooth',
+              block: 'start',
+          }) */
 
         //Forma alternativa
-        /*  const topo = section.offsetTop;
-         window.scrollTo({
-             top: topo,
-             behavior: 'smooth',
-         }); */
+        const topo = section.offsetTop - alturaMenu;
+        window.scrollTo({
+            top: topo,
+            behavior: 'smooth',
+        });
     };
 
     linksInternos.forEach((link) => {
@@ -52,11 +56,11 @@ function initScrollSuave() {
 
 initScrollSuave();
 
-const menu = document.querySelector('.menu');
-const banner = document.querySelector('.banner');
+/* const menu = document.querySelector('.menu');
 
 const alturaMenu = menu.clientHeight;
-const alturaTopoBanner = banner.offsetTop;
 
+const banner = document.querySelector('.banner');
 
-console.log(alturaTopoBanner);
+banner.style.marginTop = alturaMenu + 'px';
+ */
